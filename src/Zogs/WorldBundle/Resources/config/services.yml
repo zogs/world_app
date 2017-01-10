@@ -1,0 +1,63 @@
+parameters:
+#    my_world.example.class: My\WorldBundle\Example
+
+services:
+#    my_world.example:
+#        class: %my_world.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    # Set here the ORM EntityManager used by WorldBundle
+    world.orm.manager: '@doctrine.orm.pgsql_entity_manager'
+    world.exporter.driver: '@db.exporter.pgsql'
+    world.importer.driver: '@db.importer.pgsql'
+
+    world.form.type.autocompletecity:
+        class: Zogs\WorldBundle\Form\Type\CityToLocationType 
+        arguments: ['@world.orm.manager','@router']
+        tags:
+            - { name: form.type, alias: city_to_location_type }
+        
+    world.form.type.locationSelectorType:
+        class: Zogs\WorldBundle\Form\Type\LocationSelectorType
+        arguments: ['@world.orm.manager','@router']
+        tags:
+            - { name:form.type, alias: location_selector }
+
+    world.form.type.country:
+        class: Zogs\WorldBundle\Form\Type\CountryType
+        arguments: ['@world.orm.manager','@router']
+        tags:
+            - { name:form.type, alias: country }
+    world.form.type.state:
+        class: Zogs\WorldBundle\Form\Type\StateType
+        arguments: ['@world.orm.manager','@router']
+        tags:
+            - { name:form.type, alias: state }
+    world.form.type.city:
+        class: Zogs\WorldBundle\Form\Type\CityType
+        arguments: ['@world.orm.manager','@router']
+        tags:
+            - { name:form.type, alias: city }
+
+    world.location_manager:
+        class: Zogs\WorldBundle\Manager\LocationManager
+        arguments: ['@world.orm.manager']
+
+    world.map_manager:
+        class: Zogs\WorldBundle\Geomapper\MapManager
+        arguments: ['@service_container']
+
+    world.gmap:
+        class: Zogs\WorldBundle\Geomapper\GoogleMapAPI        
+
+    world.locationip.service:
+        class: Zogs\WorldBundle\Controller\LocationFromIpController
+        arguments: ['@service_container']
+
+    world.exporter:
+        class: Zogs\WorldBundle\Exporter\WorldSQLExporter
+        arguments: ['@world.exporter.driver']
+
+    world.importer:
+        class: Zogs\WorldBundle\Importer\WorldSQLImporter
+        arguments: ['@world.importer.driver']

@@ -1,0 +1,11 @@
+flashbag_test:
+    path: /test
+    defaults: { _controller: ZogsFlashBundle:Test:test }
+
+flashbag_test_redirect:
+    path: /test/redirect
+    defaults: { _controller: ZogsFlashBundle:Test:redirectTest }
+
+flashbag_test_redirect_show:
+    path: /test/redirect/show
+    defaults: { _controller: ZogsFlashBundle:Test:redirectShow }

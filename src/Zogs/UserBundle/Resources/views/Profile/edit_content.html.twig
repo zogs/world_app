@@ -1,0 +1,68 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if action != 'delete' %}
+
+<form action="{{ path('fos_user_profile_edit') }}?action={{ action }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit form-ws profile-edit">
+
+
+	{{ form_errors(form) }}
+
+	{% if (action == '') or (action == 'account') %}
+
+		{{ form_row(form.username) }}
+		{{ form_row(form.email) }}
+		
+		<button class="btn btn-primary btn-lg" type="submit">{{ 'profile.edit.submit'|trans }}</button>
+
+	{% endif %}
+
+
+	{% if action == 'info' %}
+
+		{{ form_row(form.firstname) }}
+		{{ form_row(form.lastname) }}
+		{{ form_row(form.description) }}
+		{{ form_row(form.gender) }}
+		{{ form_row(form.birthday,{'attr':{'class':'row-3-select-box'}}) }}
+		{{ form_row(form.location) }}
+
+		<button class="btn btn-primary btn-lg" type="submit">{{ 'profile.edit.submit'|trans }}</button>
+
+	{% endif %}
+
+
+	{% if action == 'avatar' %}
+
+
+		{{ form_row(form.avatar.file) }}
+		{{ form_row(form.avatar.updated) }}
+
+		<button class="btn btn-primary btn-lg" type="submit">{{ 'profile.edit.submit'|trans }}</button>
+
+	{% endif %}
+
+	{% if action == 'mailing' %}
+
+		{{ form_row(form.settings) }}
+
+		<button class="btn btn-primary btn-lg" type="submit">{{ 'profile.edit.submit'|trans }}</button>
+		
+	{% endif %}
+
+
+	{% if action == 'password' %}
+
+		{{ form_row(form.oldpassword) }}
+		{{ form_row(form.plainPassword) }}
+
+		<button class="btn btn-primary btn-lg" type="submit">{{ 'profile.edit.submit'|trans }}</button>
+
+	{% endif %}
+
+{{ form_end(form) }}
+
+{% elseif action == 'delete' %}
+
+		{{ render(controller('ZogsUserBundle:User:delete',{ 'template':'delete_form_embedded'})) }}
+{% endif %}
+

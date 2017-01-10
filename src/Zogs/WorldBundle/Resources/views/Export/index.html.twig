@@ -1,0 +1,43 @@
+{% extends 'ZogsWorldBundle:layout:world_layout.html.twig' %}
+
+
+{% block world_bundle_content %}
+
+	{{ form_errors(form) }}
+	{{ form_start(form) }}
+	<table class="table">
+		
+		<tr>
+			<td>Select countries you want to export:</td>
+		</tr>
+		<tr>
+			<td>
+				{% for country in form.countries.children %}
+
+				<div style="display:inline-block;width:20%;height:20px;overflow:hidden;">{{ form_widget(country) }} {{ form_label(country,null,{'label_attr':{"style":"display:inline"}}) }}</div>
+
+			
+				{% endfor %}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form_row(form.createtable) }}
+				{{ form_row(form.droptable) }}				
+				{{ form_row(form.inserts) }}				
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button type="submit" class="btn btn-primary">Export in SQL</button>
+			</td>
+		</tr>
+		
+	</table>
+
+	{{ form_end(form) }}
+
+
+{% endblock %}
+
+

@@ -1,0 +1,36 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block stylesheets %}
+ 
+    {# Get parent property #}
+    {{ parent() }}
+ 
+    {# add CSS #}
+    {% stylesheets
+    	     
+    %}
+    	<link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+ 
+{% endblock %}
+
+{% block javascripts %}
+ 
+    {{ parent() }}
+
+      {# set ckeditor directory #}
+      <script type="text/javascript">window.CKEDITOR_BASEPATH = '/Sfbase/web/bundles/zogsutils/ckeditor/';</script>
+      {# settings Zogs\UtilsBundle\Resources\public\ckeditor\config.js #}
+      {# others settings of filemanager Zogs\UtilsBundle\Resources\public\ckeditor_filemanager\scripts\filemanager.config.js  #}
+ 
+    {# add JS #}
+    {% javascripts
+     '../app/Resources/public/js/*.js'
+    'bundles/zogsutils/ckeditor/ckeditor.js'
+    %}
+
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+
+    {% endjavascripts %}
+ 
+{% endblock %}

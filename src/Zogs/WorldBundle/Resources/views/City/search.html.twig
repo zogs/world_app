@@ -1,0 +1,24 @@
+{% extends 'ZogsWorldBundle:layout:world_layout.html.twig' %}
+
+{% block world_bundle_content %}
+
+	{{ form_start(form) }}
+        {{ form_errors(form) }}
+
+		<p>
+	        {{ form_row(form.city_id) }}
+	        {{ form_row(form.city_name) }}			
+		</p>
+		<p>
+			<button class="btn btn-primary" type="submit">Rechercher</button>			
+		</p>
+
+    {{ form_end(form) }}
+
+    {% if location is defined and location.id != 0 %}
+
+		{% include 'ZogsWorldBundle:Location:view.html.twig' with {'location': location} %}
+	
+    {% endif %}
+
+{% endblock %}

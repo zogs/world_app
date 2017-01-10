@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+
+
+{% block body %}
+
+	 <div style="position:relative; width: 40%; margin: 20px auto;">
+	 {% block flash %}
+	    	{{ flashbag_all()|raw }}
+	{% endblock %}
+	</div>
+
+	
+
+	<a href="{{ path('flashbag_test') }}" class="btn btn-default">Test</a>
+	<a href="{{ path('flashbag_test_redirect') }}" class="btn btn-default">Test with redirection</a>
+    
+{% endblock %}

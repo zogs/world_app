@@ -1,0 +1,81 @@
+parameters:
+#    tuto_user.example.class: Tuto\UserBundle\Example
+
+services:
+    #Handler
+    entry_point.user_login:
+        class: Zogs\UserBundle\Service\LoginEntryPoint
+        arguments: ['@router']
+    login_success.handler:
+        class: Zogs\UserBundle\Service\LoginSuccessHandler
+        arguments: ['@router','@security.authorization_checker']
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+    logout_success.handler:
+        class: Zogs\UserBundle\Service\LogoutSuccessHandler
+        arguments: ['@router']
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+    #Security
+    user.password_encoder:
+        class: Zogs\UserBundle\Security\MyPasswordEncoder
+    #OAuth
+    user.oauth.user_provider:
+        class: Zogs\UserBundle\Providers\OAuth\UserProvider
+        arguments: 
+            - '@fos_user.user_manager'
+            - { facebook: facebookId }
+    user.oauth.success_handler:
+        class: Zogs\UserBundle\Service\OAuthSuccessHandler
+        arguments: ['@router','@security.authorization_checker','@flashbag']
+
+
+    #Form Type
+    user.registration.form.type:
+        class: Zogs\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%,'@router']
+        tags:
+            - { name: form.type, alias: user_registration }
+
+    user.profile.form.type:
+        class: Zogs\UserBundle\Form\Type\ProfilEditionType
+        arguments: ['@request_stack','@security.token_storage','@router']
+        tags:
+            - { name: form.type, alias: user_profile }
+
+    user_avatar.form.type:
+        class: Zogs\UserBundle\Form\Type\AvatarType
+        tags:
+            - { name: form.type, alias: avatar_type }
+    #Mailer
+    user.mailer:
+        class: Zogs\UserBundle\Mailer\Mailer
+        arguments: ['@mailer','@templating','@router']
+
+
+   #Form Extension
+    user_bundle.image_type_extension:
+        class: Zogs\UserBundle\Form\Extension\ImageTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
+
+    #Event Listner
+    user_bundle.listener.registration:
+        class: Zogs\UserBundle\EventListener\RegistrationListener
+        arguments: ['@doctrine.orm.entity_manager','@router','@flashbag']
+        scope: container
+        tags:
+            - { name: kernel.event_subscriber }
+    user_bundle.listener.profile:
+        class: Zogs\UserBundle\EventListener\ProfileListener
+        arguments: ['@doctrine.orm.entity_manager','@router','@flashbag']
+        scope: container
+        tags:
+            - { name: kernel.event_subscriber }
+
+    #Twig extension
+    user.twig.link:
+        class: Zogs\UserBundle\Twig\UserProfilLinkExtension
+        arguments: ['@router']
+        tags:
+            - { name: twig.extension }

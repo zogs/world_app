@@ -1,0 +1,8 @@
+services:
+    sonata.block.service.welcome:
+        class: Zogs\UtilsBundle\Admin\Blocks\WelcomeBlockService
+        arguments: [ "sonata.block.service.welcome", '@templating' ]
+        tags:
+            - { name: sonata.block }
+        calls:
+            - [ setEntityManager, ['@doctrine.orm.entity_manager']]

@@ -1,0 +1,56 @@
+{% extends 'ZogsWorldBundle:layout:world_layout.html.twig' %}
+
+{% block world_bundle_content %}
+
+	<style>
+		table th { font-weight: bold; }
+	</style>
+
+	<h2>Liste des {{ (level|trans([],'ZogsWorldBundle'))|lower }} de: {{ parent.name }}</a></h2>
+
+	<table class="table table-stripped">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>CC1</th>
+			<th>ADM1</th>
+			<th>ADM2</th>
+			<th>ADM3</th>
+			<th>ADM4</th>
+			<th>Lat</th>
+			<th>Lon</th>
+			<th>popu.</th>
+			<th>surf.</th>
+			<th>Char</th>
+			<th>DSG</th>
+			<th>UFI</th>
+			<th>UNI</th>
+			<th>lc</th>
+			<th>Characters</th>
+			<th>Action</th>
+		</tr>
+		{% for city in cities %}
+		<tr>
+			<td>{{ city.id }}</td>
+			<td>{{ city.name }}</td>
+			<td>{{ city.cc1 }}</td>
+			<td>{{ city.adm1 }}</td>
+			<td>{{ city.adm2 }}</td>
+			<td>{{ city.adm3 }}</td>
+			<td>{{ city.adm4 }}</td>
+			<td>{{ city.latitude }}</td>
+			<td>{{ city.longitude }}</td>
+			<td>{{ city.cp }}</td>
+			<td>{{ city.pop }}</td>
+			<td>{{ city.sfc }}</td>
+			<td>{{city.charCode }}</td>
+			<td>{{ city.dsg }}</td>
+			<td>{{ city.ufi }}</td>
+			<td>{{ city.uni }}</td>
+			<td>{{ city.characters }}</td>
+			<td><a href="{{ path('world_edit_city',{city: city.id}) }}" class="btn-primary btn-sm">Modifier</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+{% endblock %}

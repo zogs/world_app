@@ -1,0 +1,27 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * App
+ * 
+ * @ORM\Table(name="app")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\AppRepository")
+ */
+class App 
+{
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(name="id", type="integer")
+	 */
+	private $id;
+
+	/**
+	 * @ORM\Column(name="name", type="string", length=30)
+	 */
+	private $name;
+
+
+}

@@ -1,0 +1,6 @@
+#List here all the tables
+tables:
+    #first param: use the name of the config files in /mapping
+    #second params, use the name of the sql table which you want to import the data
+    #example :    
+    events: table_des_evenements   

@@ -1,0 +1,24 @@
+{% extends 'ZogsMailerBundle:Template:personal.html.twig' %}
+
+{% block title %}
+    <strong>{% if user is not null %}Bonjour {{ user.username|capitalize }}, {% else %} Bonjour,{% endif %}</strong><br />
+    Votre inscription est presque terminé !
+{% endblock title %}
+
+{% block content %}
+    <table cellpadding="0" cellspacing="0" border="0" class="content" style="background-color:#FFF;  position: relative; width:100%; padding:0 10%;">
+        <tbody>
+            <tr height="100">
+                <td>
+                    <a href="{{ confirmationUrl }}" style="font-weigt:bold;font-size:110%;">Voila, vous n'avez plus qu'à cliquer sur ce lien :)</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>Enjoy yourself !</i>                           
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+{% endblock content %}

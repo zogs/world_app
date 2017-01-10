@@ -1,0 +1,17 @@
+{% extends 'ZogsWorldBundle:layout:world_layout.html.twig' %}
+
+
+{% block world_bundle_content %}
+
+	{{ form_errors(form) }}
+	{{ form_start(form) }}
+		
+	{{ form_row(form.file) }}		
+	
+	<button type="submit" class="btn btn-primary">Import</button>
+	{{ form_end(form) }}
+
+
+{% endblock %}
+
+

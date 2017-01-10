@@ -1,0 +1,20 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request form form-ws w100 form-register" style="padding-left:15%;padding-right:15%;">
+    <div>
+        {% if invalid_username is defined %}
+        <div style="height:50px;text-align:center;color:red;">
+            <p>Désolé mais ce nom d'utilisateur ou adresse email "{{ invalid_username }}" n'existe pas chez nous... Vérifiez l'orthographe, ou <a href="{{ path('contact_us') }}">contactez-nous</a> directement.</p>
+        </div>
+        {% endif %}
+
+        <div class="control-group" id="control-email">            
+            <div class="controls">
+                <input type="text" id="username" name="username" required="required" placeholder="Entrer ici votre adresse email ou votre nom d'utilisateur" />                
+            </div>
+        </div>
+    </div>
+    
+    <input type="submit" class="btn btn-warning"  style="float:none" value="M'envoyer l'email de réinitialisation" />
+    
+</form>

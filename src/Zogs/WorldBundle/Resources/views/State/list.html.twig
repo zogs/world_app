@@ -1,0 +1,46 @@
+{% extends 'ZogsWorldBundle:layout:world_layout.html.twig' %}
+
+{% block world_bundle_content %}
+
+	<style>
+		table th { font-weight: bold; }
+	</style>
+
+	<h2>Liste des {{ (level|trans([],'ZogsWorldBundle'))|lower }} de: {{ parent.name }}</a></h2>
+
+	<table class="table table-stripped">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>level</th>
+			<th>DSG</th>
+			<th>CC1</th>
+			<th>ADM Parent</th>
+			<th>ADM Code</th>
+			<th>Char</th>
+			<th>UFI</th>
+			<th>UNI</th>
+			<th>Lang</th>
+			<th>Characters</th>
+			<th>Action</th>
+		</tr>
+		{% for state in states %}
+		<tr>
+			<td>{{ state.id }}</td>
+			<td><a href="{{ path(child_route,{ state: state.id}) }}">{{ state.name }}</a></td>
+			<td>{{ state.level }}</td>
+			<td>{{ state.dsg }}</td>
+			<td>{{ state.CC1 }}</td>
+			<td>{{ state.AdmParent }}</td>
+			<td>{{ state.AdmCode }}</td>
+			<td>{{ state.charCode }}</td>
+			<td>{{ state.ufi }}</td>
+			<td>{{ state.uni }}</td>
+			<td>{{ state.lang }}</td>
+			<td>{{state.characters }}</td>
+			<td><a class="btn-primary btn-sm" href="{{ path('world_edit_state',{state: state.id}) }}">Modifier</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+{% endblock %}

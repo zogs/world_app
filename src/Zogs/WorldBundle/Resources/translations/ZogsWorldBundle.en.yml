@@ -1,0 +1,19 @@
+world:
+    country:
+        label: 'Country'
+        placeholder: 'Type your country...'
+    region:
+        label: 'Region'
+        placeholder: 'Type your region...'
+    departement:
+        label: 'State'
+        placeholder: 'Type your type...'
+    district:
+        label: ''
+        placeholder: ''
+    division:
+        label: ''
+        placeholder: ''
+    city:
+        label: 'City'
+        placeholder: 'Type your city...'

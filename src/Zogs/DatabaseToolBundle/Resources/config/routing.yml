@@ -1,0 +1,18 @@
+db_convert_index:
+    path: /convert/index
+    defaults: { _controller: ZogsDatabaseBundle:Convert:index }
+
+db_convert_one:
+    path:     /one
+    defaults: { _controller: ZogsDatabaseBundle:Convert:convertOne }
+    requirements:
+        _method: GET
+
+db_convert_all:
+    path:     /all
+    defaults: { _controller: ZogsDatabaseBundle:Convert:convertAll }
+
+db_purge:
+    path:     /purge
+    defaults: { _controller: ZogsDatabaseBundle:Convert:purge }
+

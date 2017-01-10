@@ -1,0 +1,15 @@
+{% block location_selectboxs_widget %}
+     {% spaceless %}
+        {% set url = path('world_nextlevel') %}
+
+		 {{form_widget(form.id, {'id':'location_id_field'}) }}
+        
+         {% include 'ZogsWorldBundle:Form:location_selectbox.html.twig' with {form:form.country, level:'country'} %}
+         {% include 'ZogsWorldBundle:Form:location_selectbox.html.twig' with {form:form.region, level:'region'} %}
+         {% include 'ZogsWorldBundle:Form:location_selectbox.html.twig' with {form:form.departement, level:'departement'} %}
+         {% include 'ZogsWorldBundle:Form:location_selectbox.html.twig' with {form:form.district, level:'district'} %}
+         {% include 'ZogsWorldBundle:Form:location_selectbox.html.twig' with {form:form.division, level:'division'} %}
+         {% include 'ZogsWorldBundle:Form:location_selectbox.html.twig' with {form:form.city, level:'city'} %}
+
+     {% endspaceless %}
+{% endblock location_selectboxs_widget %}

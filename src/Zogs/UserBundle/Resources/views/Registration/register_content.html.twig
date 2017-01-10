@@ -1,0 +1,22 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form with ':Form:fields.html.twig' %}
+
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form form-ws label-hidden w50 form-register fleft" id="form_register" autocomplete="on">
+    
+    	{{ form_errors(form) }}
+    	
+    	{{ form_row(form.username) }}
+    	{{ form_row(form.email) }}
+    	{{ form_row(form.plainPassword) }}
+
+        <div class="hide">
+        {{ form_row(form.type) }}
+        {{ form_row(form.birthday, { 'attr': {'class':'row-3-select-box'}}) }}
+        {{ form_row(form.gender) }}
+        {{ form_row(form.location) }}
+    	</div>
+
+	{{ form_end(form) }}
+    
+</form>

@@ -1,0 +1,35 @@
+{% extends 'CivcAppBundle:Page:frontdoor.html.twig' %}
+
+{% block title %} {{ parent()  }} Connexion{% endblock title %}
+
+{% block content %}
+	
+
+	<form action="{{ path('fos_user_security_check')}}" method="POST">
+
+		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+		<label for="username">
+			<span class="icon icon-circleuser"></span>
+			<input type="text" id="username" name="_username" value="{{ app.session.get('_security.last_username') }}" required="required" placeholder="Nom d'utilisateur" />    
+		</label>
+
+		<label for="password">
+			<span class="icon glyphicon glyphicon-lock"></span>
+			<input type="password" id="password" name="_password" required="required" placeholder="Mot de passe" />
+		</label>
+
+		<label for="_submit" class="submit">
+			<span class="icon glyphicon glyphicon-cog"></span>
+			<input type="submit" id="_submit" name="_submit" value="SE CONNECTER" />
+
+		</label>
+
+		<p class="bottom">
+			<a class="" href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié </a>		    			
+		</p>
+		
+
+	</form>	
+
+{% endblock %}

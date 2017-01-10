@@ -1,0 +1,136 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: fr
+
+framework:
+    #esi:             ~
+    translator:      { fallbacks: ["%locale%"], logging: false }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: false
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   /tmp/php/sessions/world #"%kernel.root_dir%/../var/sessions/%kernel.environment%" ====> DOESNT WORK on vagrant , sessions cant be store on NFS system files
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: mysql
+        connections:
+            mysql:                
+                driver:   pdo_mysql
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+            pgsql:
+                driver:   pdo_pgsql
+                host:     "%pg_database_host%"
+                port:     "%pg_database_port%"
+                dbname:   "%pg_database_name%"
+                user:     "%pg_database_user%"
+                password: "%pg_database_password%"
+                
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
+
+    orm:
+        default_entity_manager: mysql
+        auto_generate_proxy_classes: "%kernel.debug%"
+        entity_managers:
+            mysql:
+                connection: mysql
+                auto_mapping: true
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                dql:
+                    numeric_functions:
+                        power: Zogs\UtilsBundle\DQL\Power
+                        asin: Zogs\UtilsBundle\DQL\Asin
+                        sin: Zogs\UtilsBundle\DQL\Sin
+                        pi : Zogs\UtilsBundle\DQL\Pi
+                        cos: Zogs\UtilsBundle\DQL\Cos
+                    datetime_functions:
+                        DAYNAME: Zogs\UtilsBundle\DQL\Dayname
+                        DAY: Zogs\UtilsBundle\DQL\Day
+                        MONTH: Zogs\UtilsBundle\DQL\Month
+                        YEAR: Zogs\UtilsBundle\DQL\Year
+                        DATE: Zogs\UtilsBundle\DQL\Date
+            pgsql:
+                connection: pgsql
+                mappings: 
+                    AppBundle: ~
+                    ZogsWorldBundle: ~
+
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [ ]
+    filters:
+        cssrewrite: ~
+
+# FOS user-bundle
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Zogs\UserBundle\Entity\User
+
+
+# Zogs World Bundle
+zogs_world:
+    exporter:
+        file_name: ""
+        export_dir: "%kernel.root_dir%/../web/world"
+    importer:
+        load_fixtures: true
+        files_to_import: "src/Zogs/WorldBundle/Resources/import"
+
+#Database Tool Bundle
+zogs_database_tool:
+    mysql_path: ''
+    pgsql_path: ''
+    exporter:
+        exportpath: "%kernel.root_dir%/../web/"
+    importer:
+        importpath : "%kernel.root_dir%/../web/"

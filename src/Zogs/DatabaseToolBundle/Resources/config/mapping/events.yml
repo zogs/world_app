@@ -1,0 +1,79 @@
+# Use the file to describe the fields of the table you want to import in doctrine
+#
+#
+# define the type of mapping
+type: entity
+# set the class of the entity
+class: Ws\EventsBundle\Entity\Event
+# define the relations
+relations:    
+    # Simple relation
+    # these fields will be automatically set to the doctrine entity as is, using the setFields() method
+    # syntax : entity_property_name: sql_field_name
+    # examples :    
+    id: old_id
+    title: old_title
+    slug: old_slug
+    description: old_description
+    #
+    # Static properties
+    # these will set the value defined as the property for all records
+    # examples :
+    price: 
+        type: integer
+        value: 0
+    level:
+        type: string
+        value: "debutant"
+    serie: 
+        type: value
+        value: null
+    #
+    # Date fields
+    # you can convert SQL date string in Datetime Object
+    # examples
+    date:
+        type: date
+        field: old_date
+        format: "Y-m-d"
+    time: 
+        type: datetime
+        field: old_time
+        format: "H:i:s"
+    date_depot: 
+        type: date
+        field: old_date_depot
+        format: "Y-m-d H:i:s"
+    #
+    # Complex relations that needs traitement
+    # you can create a Caller.php file with methods that returns the property you want
+    # examples :
+    type: 
+        type: call
+        class: Ws\ConvertSQLBundle\Caller\EventsCaller
+        method: setType
+    organizer:
+        type: call
+        class: Ws\ConvertSQLBundle\Caller\EventsCaller
+        method: setOrganizer
+    sport: 
+        type: call
+        class: Ws\ConvertSQLBundle\Caller\EventsCaller
+        method: setSport
+    spot:
+        type: call
+        class: Ws\ConvertSQLBundle\Caller\EventsCaller
+        method: setSpot
+        parameters:
+            fields:
+                CC1: CC1
+                ADM1: ADM1
+                ADM2: ADM2
+                ADM3: ADM3
+                ADM2: ADM4
+                city: cityID
+    location:
+        type: call
+        class: Ws\ConvertSQLBundle\Caller\EventsCaller
+        method: setLocation
+

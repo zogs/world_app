@@ -1,0 +1,11 @@
+services:
+    sonata.admin.zogs.user:
+        class: Zogs\UserBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Utilisateurs", label: "Users" }
+        arguments:
+            - ~
+            - Zogs\UserBundle\Entity\User
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]

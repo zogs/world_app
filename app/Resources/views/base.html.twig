@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+           {% stylesheets
+                'bundles/zogsutils/js/select2/select2.css'
+                'bundles/zogsutils/js/datetimepicker/jquery.datetimepicker.css'
+                'bundles/zogsutils/js/mmenu/core/css/jquery.mmenu.css'
+                'bundles/zogsutils/js/mmenu/extensions/css/jquery.mmenu.pageshadow.css'
+                'bundles/zogsutils/js/mmenu/addons/css/jquery.mmenu.counters.css'                 
+                'bundles/zogsstyle/css/default/bootstrap/css/bootstrap.css'
+                'bundles/zogsworld/css/flags/flags.css'
+                'bundles/zogsstyle/css/style.css'
+                filter="cssrewrite,?uglifycss"      
+                output="css/compiled/base.css"       
+            %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}          
+        {% endblock %} 
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        <style>
+            html { height: 100%; }
+            body { width: 70%; margin: 0 15%; height: 100%; }
+            .page-content { position: relative; height: 100%; padding: 0 20px;}
+        </style>
+
+        {% block body %}
+
+            <div class="page-content">
+            {% block page_content %}{% endblock %}                
+            </div>
+
+        {% endblock %}
+
+
+
+
+
+        {% block javascripts %}
+            {% javascripts
+                '@ZogsUtilsBundle/Resources/public/js/jquery_1.11.min.js'
+                '@ZogsUtilsBundle/Resources/public/js/functions.js'
+                '@ZogsUtilsBundle/Resources/public/js/select2/select2.min.js'
+                '@ZogsUtilsBundle/Resources/public/js/select2/locale/select2_locale_fr.js'
+                '@ZogsUtilsBundle/Resources/public/js/datetimepicker/jquery.datetimepicker.js'
+                '@ZogsUtilsBundle/Resources/public/js/timeago/jquery.timeago.js'
+                '@ZogsUtilsBundle/Resources/public/js/mmenu/core/js/jquery.mmenu.min.js'
+                '@ZogsUtilsBundle/Resources/public/js/mmenu/addons/js/jquery.mmenu.counters.min.js'
+                '@ZogsUtilsBundle/Resources/public/js/mmenu/addons/js/jquery.mmenu.backbutton.min.js'
+                '@ZogsUtilsBundle/Resources/public/js/typeahead.js/typeahead.bundle.js'
+                '@ZogsUtilsBundle/Resources/public/js/typeahead.js/handlebars-v2.0.0.js'
+                '@ZogsUtilsBundle/Resources/public/js/utils.js'
+                '@ZogsWorldBundle/Resources/public/js/worldbundle.js'
+                '@ZogsStyleBundle/Resources/public/css/default/bootstrap/js/bootstrap.js'
+                '@ZogsUserBundle/Resources/public/js/*.js'
+                output="js/compiled/base.js"
+                filter='?uglifyjs'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+    </body>
+</html>

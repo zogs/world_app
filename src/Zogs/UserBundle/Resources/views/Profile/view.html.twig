@@ -1,0 +1,145 @@
+{% extends ':layout:centered.html.twig' %}
+
+{% block page_content %}
+	<div class="viewuser">
+		<section>
+			<div class="content-header">
+				<div class="header-left">
+					<div class="user-login">
+						<img src="" alt="">
+						<h1>
+							{{ user.username }}
+						</h1>
+						{# incarner #}
+						{% if is_granted('ROLE_ALLOWED_TO_SWITH') %}
+							<a class="btn btn-small" href="?_switch_to={{ user.username }}">Incarner</a>
+						{% endif %}
+
+						{% if user.asso %} 
+							<span class="label ws-label ws-label-grey tooltiptop" data-toggle="tooltip" title="Association"><i>A</i></span>
+						{% endif %}
+						{% if user.pro %}
+							<span class="label ws-label ws-label-grey tooltiptop" data-toogle="tooltip" title="Professionnel"><i>P</i></span>
+						{% endif %}
+
+						<span class="user-descr">
+							{% if user.description %}
+								{{ user.description }}
+							{% else %}
+								{% if user == app.user %} 
+									<a href="{{	path('user_profil_edit')}}">- ajouter votre description ici -</a>
+								{% else %} 
+									- pas encore de description -
+								{% endif %} 
+							{% endif %}
+						</span>
+					</div>
+				</div>
+
+				<div class="header-right user-info">
+					<span><strong>{% if user.hasBirthday %}{{ user.birthday|calculAge }}{% endif %}, inscrit depuis {{ user.registerSince|date('d/m/Y') }}</strong></span>
+					<span>? participations | ? organisations</span>
+					<span><i>
+						{% for r in user.location.allRegions %}
+						 {{ r.name }}, 
+						{% endfor %}												
+					</i></span>
+				</div>
+			</div>
+
+			<div class="event-action-bar">
+				<div class="count_activity">
+					<span class="label">?</span> sports ce mois ci
+				</div>
+				<div class="which_activitt">
+					Sports pratiqués : ??
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<div class="col_large">
+				
+				<div class="block block-yellow event-reviews">
+					<h3>L'avis des autres</h3>
+					<div class="block-content">
+						<ul>
+							{% if user.reviewed is defined %} 
+							 {% else %} 
+							  <li><small class="noevents">Personne n'a encore laissé d'avis</small></li>
+							  {% endif %} 
+
+						</ul>
+					</div>
+				</div>
+
+				<div class="event-discussion">
+					<h3>Discussion</h3>
+					<div class="event-comments">
+						
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<aside>
+			<div class="col_small">
+				
+				<div class="block block-orange events-list">
+					<h3>Organise prochainement</h3>
+					<div class="block-content">
+						<ul>
+							{% if organize is defined %} 
+								{% for serie in organize %}
+									{% set event = serie.events|first %}
+										{% if event is defined %}
+											<li>
+												<span class="ws-icon ws-icon-small ws-icon-{{ event.sport.icon }}"></span>
+												<a href="{{ event|link2event }}"><strong>{{ event.title }}</strong></a>
+												<small>{{ event.date|date('l d m/Y') }}</small>
+											
+												{% if serie.occurences > 1 %}
+												<a class="showListSerie linkclose" href="#">{{ serie.occurences - 1 }} autres dates</a>
+												<ul class="listserie">
+													{% for event in serie.events[1:] %}
+														<li><strong>
+															<a href="{{ event|link2event }}">{{ event.date|date('l d m/Y') }}</a>
+														</strong></li>
+													{% endfor %}
+												</ul>
+											</li>
+											{% endif %}
+										{% else %}
+
+										{% endif %}				
+								{% endfor %}
+							{% else %} 
+							<li><small class="noevents">Rien de prévu ..?</small></li> 
+							{% endif %} 
+						</ul>
+					</div>
+				</div>
+
+				<div class="block block-green events-list">
+					<h3>Participe prochainement</h3>
+					<div class="block-content">
+						<ul>
+							{% if participate is defined %}
+								{% for p in participate %}
+									<li>
+										<span class="ws-icon ws-icon-small ws-icon-{{ p.event.sport.icon }}"></span>
+										<a href="{{ p.event|link2event }}"><strong>{{ p.event.title }}</strong></a>
+										<small>{{ p.event.date|date('l d m/Y') }}</small>
+									</li>
+								{% endfor %}
+							{% else %}
+							<li><small class="noevents">Rien de prévu ..?</small></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+
+{% endblock %}

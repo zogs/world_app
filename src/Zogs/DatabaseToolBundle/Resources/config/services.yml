@@ -1,0 +1,31 @@
+parameters:
+#    ws_convert_sql.example.class: Ws\ConvertSQLBundle\Example
+
+services:
+#    ws_convert_sql.example:
+#        class: %ws_convert_sql.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    
+    db.table_converter:
+        class: Zogs\DatabaseToolBundle\Converter\Converter
+        arguments: [null,'@doctrine.orm.entity_manager','@service_container']
+
+    db.table_purger:
+        class: Zogs\DatabaseToolBundle\Converter\Purger
+        arguments: ['@doctrine.orm.entity_manager']
+
+    db.exporter.mysql:
+        class: Zogs\DatabaseToolBundle\Exporter\MySQLExporter
+        arguments: [%database_name%,%database_user%,%database_password%]
+
+    db.exporter.pgsql:
+        class: Zogs\DatabaseToolBundle\Exporter\PgSQLExporter
+        arguments: [%pg_database_name%,%pg_database_user%,%pg_database_password%]
+
+    db.importer.mysql:
+        class: Zogs\DatabaseToolBundle\Importer\MySQLImporter
+        arguments: [%database_name%,%database_user%,%database_password%,'@doctrine']
+
+    db.importer.pgsql:
+        class: Zogs\DatabaseToolBundle\Importer\PgSQLImporter
+        arguments: [%pg_database_name%,%pg_database_user%,%pg_database_password%,'@doctrine']

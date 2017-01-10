@@ -1,0 +1,53 @@
+{% extends 'ZogsWorldBundle:layout:world_layout.html.twig' %}
+
+
+{% block world_bundle_content %}
+
+	<h2>Chercher une localisation :</h2>
+
+	{{ form_start(form) }}
+        {{ form_errors(form) }}
+
+		<p>	
+	        {{ form_row(form.country) }}
+
+	        {% if form.region is defined %}
+	        	{{ form_row(form.region) }}
+	        {% endif %}
+
+	        {% if form.departement is defined %}
+	        	{{ form_row(form.departement) }}
+	        {% endif %}
+
+	        {% if form.district is defined %}
+	        	{{ form_row(form.district) }}
+	        {% endif %}
+
+	        {% if form.division is defined %}
+	        	{{ form_row(form.division) }}
+	        {% endif %}
+
+	        {% if form.city is defined %}
+	        	{{ form_row(form.city) }}
+	        {% endif %}
+
+		</p>
+
+		<p>
+        	<input class="btn btn-primary" type="submit" value="Envoyer">
+    	</p>
+
+	 {{ form_end(form) }}
+
+	{% if location.id != 0 %}
+		{% include 'ZogsWorldBundle:Location:view.html.twig' with {'location' : location} %}		
+	{% endif %}
+
+
+		
+
+
+{% endblock %}
+
+
+

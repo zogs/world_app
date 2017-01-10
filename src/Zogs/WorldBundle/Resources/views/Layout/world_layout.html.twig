@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block page_content %}
+
+	<style>
+		.flashbags { position:relative; height: 60px; }
+	</style>
+
+	<p>
+		<h1><img src="{{ asset('bundles/zogsworld/css/flags/globe.png') }}" width="40px" height="30px"> <a href="{{ path('world_index') }}">World Database</a></h1>
+	</p>
+
+	<div class="flashbags">{{ flashbag_all()|raw }}</div>
+
+	<p>
+		{% block world_bundle_content %}{% endblock %}
+	</p>
+{% endblock %}

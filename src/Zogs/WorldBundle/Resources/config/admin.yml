@@ -1,0 +1,44 @@
+services:
+    sonata.admin.zogs.world_location:
+        class: Zogs\WorldBundle\Admin\LocationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "World", label: "Location" }
+        arguments:
+            - ~
+            - Zogs\WorldBundle\Entity\Location
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]
+
+    sonata.admin.zogs.world_country:
+        class: Zogs\WorldBundle\Admin\CountryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "World", label: "Country" }
+        arguments:
+            - ~
+            - Zogs\WorldBundle\Entity\Country
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]
+
+    sonata.admin.zogs.world_state:
+        class: Zogs\WorldBundle\Admin\StateAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "World", label: "States" }
+        arguments:
+            - ~
+            - Zogs\WorldBundle\Entity\State
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]
+
+    sonata.admin.zogs.world_city:
+        class: Zogs\WorldBundle\Admin\CityAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "World", label: "Cities" }
+        arguments:
+            - ~
+            - Zogs\WorldBundle\Entity\City
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]

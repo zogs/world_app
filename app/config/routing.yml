@@ -1,0 +1,22 @@
+app_homepage:
+    path: /
+    defaults: 
+        _controller: FrameworkBundle:Redirect:redirect
+        route: world_index
+    
+
+zogs_world:
+    resource: "@ZogsWorldBundle/Resources/config/routing.yml"
+    prefix:   /world
+
+zogs_user:
+    resource: "@ZogsUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+zogs_utils:
+    resource: "@ZogsUtilsBundle/Resources/config/routing.yml"
+    prefix:   /utils
+
+zogs_flash:
+    resource: "@ZogsFlashBundle/Resources/config/routing.yml"
+    prefix:   /flashbag

@@ -1,0 +1,18 @@
+parameters:
+#    my_flash.example.class: My\FlashBundle\Example
+
+services:
+#    my_flash.example:
+#        class: %my_flash.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    flashbag:
+        class: Zogs\FlashBundle\Controller\FlashController
+        arguments: ['@session']
+        tags:
+            - { name: flashbag.service , alias:flashbag }
+
+    flashbag.twig.message_extension:
+        class: Zogs\FlashBundle\Twig\FlashbagExtension
+        arguments: ['@service_container']
+        tags:
+            - { name: twig.extension }

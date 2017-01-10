@@ -1,0 +1,29 @@
+
+<table class="table table-stripped">
+	<tr>
+		<th>Id</th>	
+		{% if location.country %}<th>Pays</th>{% endif %}
+		{% if location.region %}<th>Region</th>{% endif %}
+		{% if location.departement %}<th>Departement</th>{% endif %}
+		{% if location.district %}<th>District</th>{% endif %}
+		{% if location.division %}<th>Division</th>{% endif %}
+		{% if location.city %}<th>Ville</th>{% endif %}
+	</tr>
+	{% if location is defined and location.id !=0 %}
+	<tr>
+		<td>{{ location.id }}</td>
+		{% if location.country %}<td>{{ location.country.name }}</td>{% endif %}		
+		{% if location.region %}<td>{{ location.region.name }}</td>{% endif %}
+		{% if location.departement %}<td>{{ location.departement.name }}</td>{% endif %}
+		{% if location.district %}<td>{{ location.district.name }}</td>{% endif %}
+		{% if location.division %}<td>{{ location.division.name }}</td>{% endif %}
+		{% if location.city %}<td>{{ location.city.name }}</td>{% endif %}
+	</tr>
+	{% else %}
+	<tr>
+		<td colspan="5">Cette Location n'existe pas</td>
+	</tr>
+	{% endif %}
+</table>
+
+

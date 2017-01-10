@@ -1,0 +1,35 @@
+parameters:
+#    my_utils.example.class: Zogs\UtilsBundle\Example
+
+services:
+#    my_utils.example:
+#        class: %my_utils.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    utils.form.tags_type:
+        class: Zogs\UtilsBundle\Form\Type\TagsType
+        tags:
+            - { name: form.type, alias: tags }
+
+#Profiler matcher
+    utils.profiler_matcher:
+        class: Zogs\UtilsBundle\Profiler\AdminMatcher
+        arguments: ["@security.authorization_checker"]
+
+#Ftp Dowloader
+    utils.downloader.ftp:
+        class: Zogs\UtilsBundle\Downloader\FtpDownloader
+        arguments: [%kernel.root_dir%]
+
+#Twig extension
+    utils.twig.age_calculator:
+        class: Zogs\UtilsBundle\Twig\AgeCalculatorExtension
+        tags:
+            - { name: twig.extension }
+    utils.twig.giphy:
+        class: Zogs\UtilsBundle\Twig\GiphyExtension
+        tags:
+            - { name: twig.extension }
+    utils.twig.js.date:
+        class: Zogs\UtilsBundle\Twig\JavascriptDateExtension
+        tags:
+            - { name: twig.extension }

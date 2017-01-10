@@ -1,0 +1,89 @@
+world_index:
+    path: /
+    defaults: { _controller: ZogsWorldBundle:Default:index }
+    requirements: 
+        _method: GET
+
+world_list_country:
+    path: /country/list
+    defaults: { _controller: ZogsWorldBundle:Country:list }
+
+world_list_region:
+    path: /country/{country}/region/list/
+    defaults: { _controller: ZogsWorldBundle:State:listRegion }
+
+world_list_departement:
+    path: /region/{state}/departement/list/
+    defaults: { _controller: ZogsWorldBundle:State:listDepartement }
+
+world_list_district:
+    path: /departement/{state}/district/list/
+    defaults: { _controller: ZogsWorldBundle:State:listDistrict }
+
+world_list_division:
+    path: /district/{state}/division/list/
+    defaults: { _controller: ZogsWorldBundle:State:listDivision }
+
+world_list_city:
+    path: /state/{state}/city/list/
+    defaults: { _controller: ZogsWorldBundle:City:list }
+
+world_location_select_test:
+    path: /location/select
+    defaults: { _controller: ZogsWorldBundle:Location:locationSelect }
+    requirements:
+        _method: GET|POST
+
+world_edit_country:
+    path: /country/{country}/edit
+    defaults: { _controller: ZogsWorldBundle:Country:edit }
+
+world_edit_state:
+    path: /state/{state}/edit
+    defaults: { _controller: ZogsWorldBundle:State:edit }
+
+world_edit_city:
+    path: /city/{city}/edit
+    defaults: { _controller: ZogsWorldBundle:City:edit }
+
+world_location_select_nextlevel:
+    path: /location/levelchildren
+    defaults: { _controller: ZogsWorldBundle:Location:nextGeoLevel }
+    requirements:
+        _method: GET
+
+world_city_search:
+    path: /city/search
+    defaults: { _controller: ZogsWorldBundle:City:search }
+    requirements:
+        _method: GET|POST
+
+world_city_view:
+    path: /city/view/{city}
+    defaults: { _controller: ZogsWorldBundle:City:view }
+    requirements:
+        _method: GET
+
+world_location_nearest:
+    path: /location/near/{lat}/{lon}/{country}
+    defaults: { _controller: ZogsWorldBundle:Location:nearestLatLon, country: France }
+    requirements:
+        _method: GET
+
+world_export:
+    path: /export
+    defaults: { _controller: ZogsWorldBundle:Export:index }
+    requirements:
+        _method: GET|POST
+
+world_import:
+    path: /import
+    defaults: { _controller: ZogsWorldBundle:Import:index }
+    requirements:
+        _method: GET|POST
+
+world_autocompletecity:
+    path: /city/autocomplete/{country}/{prefix}
+    defaults: { _controller: ZogsWorldBundle:City:autoComplete, country:'FR', prefix:'' }
+    requirements:
+        _method: GET

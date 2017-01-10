@@ -1,0 +1,33 @@
+{% extends 'ZogsWorldBundle:layout:world_layout.html.twig' %}
+
+{% block world_bundle_content %}
+
+	<style>
+            .side-countries { position: absolute; right: 0; top: 0; height: 100%; padding: 20px 0px 0 10px; border-left: 1px solid #EEE;}
+    </style>
+
+	<div class="side-countries">
+		<h4>Actuellement en base : {{ countries|length }} pays</h4>
+		<ul>
+			{% for country in countries %}
+				<li><span class="flag flag-{{ country.cc1|lower }}"></span> {{ country.name }}</li>					
+			{% endfor %}
+			
+		</ul>
+	</div>
+
+	<h2>Accès à la base</h2>
+	<p>
+		<a class="btn btn-default" href="{{ path('world_list_country') }}">Liste des pays</a><br>
+	</p>
+	<p>
+		<a class="btn btn-default btn-sm" href="{{ path('world_location_select_test') }}">Chercher une localisation</a>
+		<a class="btn btn-default btn-sm" href="{{ path('world_city_search') }}">Chercher une ville par nom</a>
+	</p>
+
+	<p>
+		<h2>Gestion de la base</h2>
+		<a class="btn btn-default" href="{{ path('world_export') }}">Exporter</a>
+		<a class="btn btn-default" href="{{ path('world_import') }}">Importer</a>
+	</p>
+{% endblock %}

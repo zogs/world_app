@@ -1,0 +1,34 @@
+{% extends ":layout:centered.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block page_content %}
+
+{% set action = app.request.query.get('action') %}
+	
+<div class="page-account">
+	 <div class="page-header">        
+        <h1>
+           <img src="{{ asset(app.user.avatar.getWebPath) }}" alt="" class="user-avatar-big"/> Mon compte
+        </h1>
+    </div>
+
+	<div class="col-small">	
+
+			{% block fos_user_content %}
+			{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+			{% endblock fos_user_content %}
+
+	</div>
+
+	<div class="col-large">			
+		<ul class="menu-action">
+			<li class="{% if action == 'account'%}selected{% endif %}"><i class="icon-user"></i><a href="{{ path('fos_user_profile_edit') }}?action=account">Mon compte</a></li>
+			<li class="{% if action == 'info'%}selected{% endif %}"><i class="icon-star"></i><a href="{{ path('fos_user_profile_edit') }}?action=info">Mon profil</a></li>
+			<li class="{% if action == 'avatar'%}selected{% endif %}"><i class="icon-picture"></i><a href="{{ path('fos_user_profile_edit') }}?action=avatar">Mon avatar</a></li>
+			<li class="{% if action == 'password'%}selected{% endif %}"><i class="icon-lock"></i><a href="{{ path('fos_user_profile_edit') }}?action=password">Mon mot de passe</a></li>			
+			<li class="{% if action == 'delete'%}selected{% endif %}"><i class="icon-fire"></i><a href="{{ path('fos_user_profile_edit') }}?action=delete">Supprimer mon compte</a></li>
+		</ul>			
+	</div>
+</div>
+{% endblock %}
